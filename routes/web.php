@@ -15,8 +15,8 @@ Route::get('/', function () {
     return view('home');
 });
 
-Route::get('/nuevo', function () {
+Route::get('/nuevo', ['as'=>'new', function () {
     return view('newReporte');
-});
+}]);
 
 Route::resource('Reporte', 'ReporteController');

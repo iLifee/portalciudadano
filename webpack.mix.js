@@ -15,6 +15,7 @@ mix.js([
 	// 'resources/assets/js/axios.js',
 	'resources/assets/js/app.js',
 	// 'resources/assets/js/humanized_time_span.js',
+	// 'resources/assets/js/vee-validate.js',
 	], 'public/js/app.js');
 
 mix.styles([

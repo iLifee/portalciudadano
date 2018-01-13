@@ -10,15 +10,18 @@
                             <form>
                               <div class="form-group required">
                                 <label for="titulo">Título</label>
-                                <input type="text" class="form-control" id="titulo" v-model="titulo" required>
+                                <input class="form-control" id="titulo" v-model="titulo" v-validate="'required'" type="text" name="titulo">
+                                <span v-show="errors.has('titulo')" class="help is-danger">{{ errors.first('titulo') }}</span>
                               </div>
                               <div class="form-group required">
                                 <label for="reporte">Reporte</label>
-                                <textarea class="form-control" rows="5" id="reporte" v-model="reporte" required></textarea>
+                                <textarea class="form-control" rows="10" id="reporte" v-model="reporte" v-validate="'required'" type="text" name="reporte" ></textarea>
+                                <span v-show="errors.has('reporte')" class="help is-danger">{{ errors.first('reporte') }}</span>
                               </div>
                               <div class="form-group required">
                                 <label for="autor">Autor</label>
-                                <input type="text" class="form-control" id="autor" required v-model="autor">
+                                <input class="form-control" id="autor" v-model="autor" v-validate="'required|alpha_spaces'" type="text" name="autor">
+                                <span v-show="errors.has('autor')" class="help is-danger">{{ errors.first('autor') }}</span>
                               </div>
                               <div class="checkbox">
                                 <label>
@@ -27,9 +30,10 @@
                               </div>
                               <div class="form-group required" v-if="sendNotification">
                                 <label for="email">Correo electrónico</label>
-                                <input type="email" class="form-control" id="email" required v-model="email">
+                                <input class="form-control" id="email" v-model="email" v-validate="'required|email'" type="text" name="email">
+                                <span v-show="errors.has('email')">{{ errors.first('email') }}</span>
                               </div>
-                              <button type="submit" class="btn btn-primary btn-Enviar" v-on:click.prevent="newReporte()">Enviar Reporte</button>
+                              <button type="button" class="btn btn-primary btn-Enviar" v-on:click.prevent="validateForm()">Enviar Reporte</button>
                             </form>
                         </div>
                     </div>
@@ -48,8 +52,9 @@
                     this.email = '';
                 }
             },
-            newReporte: function () {
-                if (this.titulo != '' && this.reporte != '' && this.autor != '') {
+            validateForm: function(){
+                this.$validator.validateAll().then((result) => {
+                if (result) {
                     swal.showLoading();
                     let urlStore = 'Reporte';
                     axios.post(urlStore, {
@@ -62,16 +67,17 @@
                         if (response.data.success) {
                             swal.hideLoading();
                             toastr.success('Reporte guardado.');
-                            this.error = false;
+                            // this.error = false;
                             this.titulo = '';
                             this.reporte = '';
                             this.autor = '';
                             this.email = '';
                         }
                     });
-                }else{
-                    this.error = true;
+                  return;
                 }
+                toastr.warning('Verifica los campos que son obligatorios. ');
+              });
             },
         },
         data: function () {

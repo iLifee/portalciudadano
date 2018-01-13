@@ -15,13 +15,20 @@
     <body>
         <div id="app">
             <nav class="navbar justify-content-between fixed-top" style="background-color: #134F5C">
-              <a class="navbar-brand" href="#">
-                <!-- <img src="/assets/brand/bootstrap-solid.svg" width="30" height="30" class="d-inline-block align-top" alt=""> -->
-                Portal Ciudadano
-              </a>
-              <a href="{{url('/nuevo')}}" class="navbar-text pull-right newReport">
-                  Nuevo Reporte
-              </a>
+                @if(Request::is('/'))
+                  <a class="navbar-brand" href="{{url('/')}}">
+                    <!-- <img src="/assets/brand/bootstrap-solid.svg" width="30" height="30" class="d-inline-block align-top" alt=""> -->
+                    Portal Ciudadano
+                  </a>
+                  <a href="{{url('/nuevo')}}" class="navbar-text pull-right newReport">
+                      Nuevo Reporte
+                  </a>
+                @elseif(Route::current()->getName() == 'new')
+                    <a class="navbar-brand" href="{{url('/')}}">
+                        <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>
+                        Últimos reportes
+                    </a>
+                @endif
             </nav>
             <div class="container">
                 @yield('content')
