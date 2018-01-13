@@ -1,0 +1,65 @@
+@import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);
+
+html, body {
+    font-family: 'Raleway', sans-serif;
+    font-weight: 500;
+    margin: 0 auto;
+}
+.navbar-brand:hover{
+	color: #FFFFFF;
+    text-decoration: none;
+}
+.navbar-brand {
+    font-weight: bold;
+    color: white;
+}
+.navbar-brand a{
+	color: #FFFFFF;
+    text-decoration: none;
+}
+.pageTitle {
+    margin-bottom: 30px;
+}
+.newReport {
+    color: white;
+    font-weight: bold;
+}
+.newReport:hover {
+	color: #FFFFFF;
+    text-decoration: none;
+}
+.postText {
+    margin-top: 25px;
+}
+.postText p {
+    color: black;
+    font-size: 16px;
+    /*border: 1px solid black;*/
+}
+.postAuthor {
+    margin-top: 25px;
+}
+
+
+/*CSS FOR NEW REPORT*/
+
+.required label:after {
+    color: red;
+    content: ' *';
+    display:inline;
+}
+
+.title{
+    margin: 0 auto; 
+    width: 70%;
+}
+
+.formulario{
+    width: 70%; 
+    margin: 0 auto;
+}
+
+.btn-Enviar{
+    width: 100%;
+    height: 50px;
+}
